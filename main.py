@@ -1,14 +1,11 @@
-users: list[dict[str, str]] = [
-    {"name": "Leon", "surname": "Hajdukiewicz", "posts": 1},
-    {"name": "Kacper", "surname": "Macioch", "posts": 2},
-    {"name": "Michał", "surname": "Krzywiński", "posts": 3},
-    {"name": "Tymon", "surname": "Leszczyc", "posts": 2},
-    {"name": "Michał", "surname": "Lębryk", "posts": 2},
-]
-print(f"Witaj {users[0]['name']}")
+from models.data import users
+from utils.crud import read
 
-def read(users: list[dict[str, str]])->None:
-    for user in users[1:]:
-        print(f"Twój znajomy {user['name']} opublikował {user['posts']} posty")
+
+if __name__ == '__main__':
+    print(f'Witaj {users[0]}')
+
 
 read(users)
+
+
