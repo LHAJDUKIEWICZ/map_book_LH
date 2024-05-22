@@ -50,18 +50,18 @@ def map_single_users(imie,postow,miasto:str):
                   icon=folium.Icon(color='blue')).add_to(map)
     map.save(f'map_{miasto}.html')
 
- def map_all_users(users):
-     map = folium.Map(location=[52,20], zoom_start=6)
+def map_all_users(users):
+    map = folium.Map(location=[52,20], zoom_start=6)
     for user in users:
 
-            url = (f'https://pl.wikipedia.org/wiki/{user['location']}')
-            response = requests.get(url)
-            response_html = BeautifulSoup(response.text, 'html.parser')
-            longitude = float(response_html.select('.longitude')[1].text.replace(',', '.'))
-            latitude = float(response_html.select('.latitude')[1].text.replace(',', '.'))
-            print(longitude, latitude)
-
-
-     folium.Marker(location=[latitude, longitude], popup=f'{user['name']},postów: {user['location']},\n{user}',
+        url=(f'https://pl.wikipedia.org/wiki/{user['location']}')
+        response=requests.get(url)
+        response_html=BeautifulSoup(response.text,'html.parser')
+        longitude=float(response_html.select('.longitude')[1].text.replace(',','.'))
+        latitude=float(response_html.select('.latitude')[1].text.replace(',','.'))
+        print(longitude,latitude)
+        folium.Marker(location=[latitude, longitude], popup=f'{user['name']},postów: {user['posts']},\n miasto: {user['location']}',
                       icon=folium.Icon(color='blue')).add_to(map)
-     map.save(f'map_{miasto}.html')
+
+    map.save(f'map.html')
+    map_all_users(users)
